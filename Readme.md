@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Антон Романов](https://up.htmlacademy.ru/php/13/user/918779).
-* Наставник: `Неизвестно`.
+* Наставник: [Никита Колосов](https://htmlacademy.ru/profile/id1186205).
 
 ---
 
