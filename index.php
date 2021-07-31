@@ -45,6 +45,27 @@ $advertises = [
     ]
 ];
 
+function decorate_price ($input) {
+    $output = "";
+    $input = ceil($input);
+
+    if ($input >= 1000) {
+
+        $input = substr($input, 0, -3)." " . substr($input, -3);
+
+    }
+
+    else {
+
+        $input = "$input";
+
+    }
+    
+    $output = $input . " " . "<span>&#8381;</span>";
+
+    return $output;
+} 
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -96,9 +117,9 @@ $advertises = [
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $catlist):?>
+            <?php foreach ($categories as $category_list):?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html"><?=$catlist;?></a>
+                <a class="promo__link" href="pages/all-lots.html"><?=$category_list;?></a>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -119,7 +140,7 @@ $advertises = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$adv['price'];?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=decorate_price($adv['price']);?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
@@ -137,9 +158,9 @@ $advertises = [
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $catlist): ?>
+            <?php foreach ($categories as $category_list): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$catlist;?></a>
+                <a href="pages/all-lots.html"><?=$category_list;?></a>
             </li>
             <?php endforeach; ?>
         </ul>
