@@ -28,13 +28,13 @@ $advertises = [
     [
     'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
     'category' => 'Ботинки',
-    'price' => 900,
+    'price' => 10999,
     'url' => '/img/lot-4.jpg'
     ],
     [
     'name' => 'Куртка для сноуборда DC Mutiny Charocal',
     'category' => 'Одежда',
-    'price' => 100000000,
+    'price' => 7500,
     'url' => '/img/lot-5.jpg'
     ],
     [
