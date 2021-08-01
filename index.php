@@ -28,13 +28,13 @@ $advertises = [
     [
     'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
     'category' => 'Ботинки',
-    'price' => 10999,
+    'price' => 900,
     'url' => '/img/lot-4.jpg'
     ],
     [
     'name' => 'Куртка для сноуборда DC Mutiny Charocal',
     'category' => 'Одежда',
-    'price' => 7500,
+    'price' => 100000000,
     'url' => '/img/lot-5.jpg'
     ],
     [
@@ -51,20 +51,14 @@ function decorate_price ($input) {
 
     if ($input >= 1000) {
 
-        $input = substr($input, 0, -3)." " . substr($input, -3);
+        $input = number_format($input, 0, '',' ');
 
     }
 
-    else {
-
-        $input = "$input";
-
-    }
-    
     $output = $input . " " . "<span>&#8381;</span>";
 
     return $output;
-} 
+}
 
 ?>
 <!DOCTYPE html>
