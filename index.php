@@ -7,7 +7,6 @@ require_once('functions.php');
 $main_content = include_template('main.php', [
     'categories' => $categories,
     'advertises' => $advertises,
-    'lot_timer' => $lot_timer
 ]);
 
 $layout_content = include_template('layout.php', [
