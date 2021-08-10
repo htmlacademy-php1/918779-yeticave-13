@@ -28,9 +28,10 @@
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?=decorate_price(htmlspecialchars($adv['price']));?></span>
                         </div>
-                        <?php $date_remaining = date_range(htmlspecialchars($adv["data"])) ?>
-                        <div class="lot__timer timer <?php if ($date_remaining[0] < 1): ?>timer--finishing<?php endif; ?>">
-                            <?= "$date_remaining[0] : $date_remaining[1]"; ?>
+                        <?=$date_remaining = date_range(htmlspecialchars($adv["data"]));?>
+                        <div class="lot__timer timer <?=date_warning($date_remaining);?>">
+                            <?=decorate_time($date_remaining);?>
+
                         </div>
                     </div>
                 </div>
