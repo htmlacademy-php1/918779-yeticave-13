@@ -42,9 +42,13 @@ function date_warning ($data_input) {
 
     $data = (int)$data_input;
 
-    if ($data < 1)
+    $data_output = "";
 
-    $data_output = 'timer--finishing';
+    if ($data < 1) {
+
+    $data_output = "timer--finishing";
+
+    }
 
     return $data_output;
 
