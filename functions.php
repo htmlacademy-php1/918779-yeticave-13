@@ -32,14 +32,17 @@ function date_range ($date_input) {
     $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
     $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
 
-    $date_output[] = (int)$hours;
-    $date_output[] = (int)$minutes;
+    $date_output[] = $hours;
+    $date_output[] = $minutes;
 
     return $date_output;
 }
 
 function date_warning ($data_input) {
-    if ($data_input[0] < 1)
+
+    $data = (int)$data_input;
+
+    if ($data < 1)
 
     $data_output = 'timer--finishing';
 
