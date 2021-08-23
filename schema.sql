@@ -38,7 +38,7 @@ FOREIGN KEY (category_id) REFERENCES categories(id)
 
 CREATE TABLE bets (
 id INT AUTO_INCREMENT PRIMARY KEY,
-date_bet DATETIME,
+date_bet DATETIME DEFAULT CURRENT_TIMESTAMP,
 sum INT NOT NULL,
 user_id INT,
 lot_id INT,
