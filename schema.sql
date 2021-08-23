@@ -4,6 +4,15 @@ CREATE DATABASE yeticave
 
 USE yeticave;
 
+CREATE TABLE users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+user_registration DATETIME DEFAULT CURRENT_TIMESTAMP,
+email VARCHAR(256) NOT NULL UNIQUE,
+user_name VARCHAR(128) NOT NULL,
+user_password VARCHAR(128) NOT NULL,
+contacts TEXT
+);
+
 CREATE TABLE categories (
 id INT AUTO_INCREMENT PRIMARY KEY,
 category_name VARCHAR(128) NOT NULL UNIQUE,
@@ -35,13 +44,4 @@ user_id INT,
 lot_id INT,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (lot_id) REFERENCES lots(id)
-);
-
-CREATE TABLE users (
-id INT AUTO_INCREMENT PRIMARY KEY,
-user_registration DATETIME DEFAULT CURRENT_TIMESTAMP,
-email VARCHAR(256) NOT NULL UNIQUE,
-user_name VARCHAR(128) NOT NULL,
-user_password VARCHAR(128) NOT NULL,
-contacts TEXT
 );
