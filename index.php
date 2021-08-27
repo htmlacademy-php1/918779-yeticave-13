@@ -29,8 +29,7 @@ else {
 
     } else {
         
-       $error = mysqli_error($link);
-       http_response_code();
+       $error = header('Location: http://localhost/error.php',true, 404);
     }
 
     $main_content = include_template('main.php', [

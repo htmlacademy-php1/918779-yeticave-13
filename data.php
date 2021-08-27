@@ -8,8 +8,7 @@ $user_name = "Антон"; // укажите здесь ваше имя
 if(!$link) {
 
     $error = mysqli_connect_error();
-    $connect = include_template('error.php', ['error' => $error]);
-    http_response_code();
+    $connect = header('Location: http://localhost/error.php',true, 500);
 }   
 
 else {
@@ -31,8 +30,7 @@ else {
         // Получить текст последней ошибки
         
         $error = mysqli_error($link);
-        $content = include_template('error.php', ['error' => $error]);
-        http_response_code();        
+        $content = header('Location: http://localhost/error.php',true, 404);      
         
     }
 }
