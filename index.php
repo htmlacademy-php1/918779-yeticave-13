@@ -9,7 +9,7 @@ if(!$link) {
     $error = mysqli_connect_error();
     $connect = include_template('error.php', ['error' => $error]);
     http_response_code();
-    
+
 }   
 
 else {
