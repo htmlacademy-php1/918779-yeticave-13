@@ -4,53 +4,37 @@ $is_auth = rand(0, 1);
 date_default_timezone_set('Europe/Moscow');
 
 $user_name = "Антон"; // укажите здесь ваше имя
-$categories = [
-    "Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"
-];
 
-$advertises = [
-    [
-    'name' => '2014 Rossignol District Snowboard',
-    'category' => 'Доски и лыжи',
-    'price' => 10999,
-    'url' => '/img/lot-1.jpg',
-    'data' => '2021-08-10'
-    ],
-    [
-    'name' => 'DC Ply Mens 2016/2017 Snowboard',
-    'category' => 'Доски и лыжи',
-    'price' => 159999,
-    'url' => '/img/lot-2.jpg',
-    'data' => '2021-08-11'
-    ],
-    [
-    'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-    'category' => 'Крепления',
-    'price' => 8000,
-    'url' => '/img/lot-3.jpg',
-    'data' => '2021-08-12'
-    ],
-    [
-    'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
-    'category' => 'Ботинки',
-    'price' => 10999,
-    'url' => '/img/lot-4.jpg',
-    'data' => '2021-08-13'
-    ],
-    [
-    'name' => 'Куртка для сноуборда DC Mutiny Charocal',
-    'category' => 'Одежда',
-    'price' => 7500,
-    'url' => '/img/lot-5.jpg',
-    'data' => '2021-08-14'
-    ],
-    [
-    'name' => 'Маска Oakley Canopy',
-    'category' => 'Разное',
-    'price' => 5400,
-    'url' => '/img/lot-6.jpg',
-    'data' => '2021-08-15'
-    ]
-];
+if(!$link) {
+
+    $error = mysqli_connect_error();
+    $connect = header('Location: /error.php',true, 500);
+    exit;
+}   
+
+else {
+
+    // Запрос на получение списка категорий
+    $sql = 'SELECT category_code, category_name FROM categories ORDER BY id ASC';
+    
+    //Выполняем запрос и получаем результат
+    $result = mysqli_query($link, $sql);
+    
+    // Запрос выполнен успешно
+    if ($result) {
+        
+        // Получаем все категории в виде двухмерного массива
+        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    
+    } else {
+    
+        // Получить текст последней ошибки
+        
+        $error = mysqli_error($link);
+        $content = header('Location: /error.php',true, 404);  
+        exit;    
+        
+    }
+}
 
 ?>
