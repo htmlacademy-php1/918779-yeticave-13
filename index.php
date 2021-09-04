@@ -5,7 +5,7 @@ require_once('init.php');
 require_once('data.php');
 
 //Запрос на показ лотов
-$sql = 'SELECT lots.lot_name, lots.price, lots.photo, lots.date_expiration, categories.category_name, MAX(bets.sum) as current_price 
+$sql = 'SELECT lots.id, lots.lot_name, lots.price, lots.photo, lots.date_expiration, categories.category_name, MAX(bets.sum) as current_price 
 FROM lots JOIN categories ON lots.category_id=categories.id 
 JOIN bets ON bets.lot_id=lots.id 
 WHERE lots.date_expiration > NOW() 
@@ -16,8 +16,8 @@ if ($res) {
     $advertise = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
 } else {
-        
-    $error = header('Location: /error.php',true, 404);
+    http_response_code(404);        
+    header('Location: /error.php',true, 404);
     exit;
 }
 
