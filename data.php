@@ -15,7 +15,7 @@ if(!$link) {
 else {
 
     // Запрос на получение списка категорий
-    $sql = 'SELECT category_code, category_name FROM categories ORDER BY id ASC';
+    $sql = 'SELECT id, category_code, category_name FROM categories ORDER BY id ASC';
     
     //Выполняем запрос и получаем результат
     $result = mysqli_query($link, $sql);
