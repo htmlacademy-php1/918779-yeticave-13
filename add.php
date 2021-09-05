@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             "errors" => $errors
          ]);
     } else {
-        $sql = "INSERT INTO lots (create_datе, lot_name, user_description, photo, price, date_expiration, step, user_id, category_id) VALUES (NOW(), ?, ?, ?, ?, ?, ?, 1, ?)";
+        $sql = "INSERT INTO lots (lot_name, category_id, user_description, price, step, date_expiration, user_id, photo, create_datе) VALUES (?, ?, ?, ?, ?, ?, 1, ?, NOW())";
         $stmt = db_get_prepare_stmt($link, $sql, $lot);
         $res = mysqli_stmt_execute($stmt);
     
