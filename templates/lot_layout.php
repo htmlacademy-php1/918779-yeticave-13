@@ -43,34 +43,31 @@
   </header>
 
   <main>
+    <nav class="nav">
+        <ul class="nav__list container">
+          <?php foreach ($categories as $category_list):?>
+          <li class="nav__item">
+            <a href="all-lots.html"><?= $category_list['category_name']; ?></a>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </nav>
     <?=$content;?>
   </main>
 
 </div>
 
 <footer class="main-footer">
-  <nav class="nav">
-    <ul class="nav__list container">
-      <li class="nav__item">
-        <a href="all-lots.html">Доски и лыжи</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Крепления</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Ботинки</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Одежда</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Инструменты</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Разное</a>
-      </li>
-    </ul>
-  </nav>
+    <nav class="nav">
+        <ul class="nav__list container">
+            <!--заполните этот список из массива категорий-->
+            <?php foreach ($categories as $category_list): ?>
+            <li class="nav__item">
+                <a href="pages/all-lots.html"><?= $category_list['category_name']; ?></a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
   <div class="main-footer__bottom container">
     <div class="main-footer__copyright">
       <p>© 2019, YetiCave</p>

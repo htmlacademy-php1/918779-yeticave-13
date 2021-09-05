@@ -1,12 +1,3 @@
-    <nav class="nav">
-      <ul class="nav__list container">
-        <?php foreach ($categories as $category_list):?>
-        <li class="nav__item">
-          <a href="all-lots.html"><?= $category_list['category_name']; ?></a>
-        </li>
-        <?php endforeach; ?>
-      </ul>
-    </nav>
     <section class="lot-item container">
       <h2><?= $lot['lot_name']; ?></h2>
       <div class="lot-item__content">
@@ -29,7 +20,7 @@
                 <span class="lot-item__cost"><?=decorate_price(htmlspecialchars($lot['price']));?></span>
               </div>
               <div class="lot-item__min-cost">
-                Мин. ставка <span><?=decorate_price(htmlspecialchars($lot['current_price']));?></span>
+                Мин. ставка <span>12 000 р</span>
               </div>
             </div>
             <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post" autocomplete="off">

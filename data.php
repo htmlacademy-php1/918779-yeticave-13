@@ -15,17 +15,17 @@ if(!$link) {
 else {
 
     // Запрос на получение списка категорий
-    $sql = 'SELECT id, category_code, category_name FROM categories ORDER BY id ASC';
+    $categories_list = "SELECT id, category_code, category_name FROM categories ORDER BY id ASC";
     
     //Выполняем запрос и получаем результат
-    $result = mysqli_query($link, $sql);
+    $categories_result = mysqli_query($link, $categories_list);
     
     // Запрос выполнен успешно
-    if ($result) {
+    if ($categories_result) {
         
         // Получаем все категории в виде двухмерного массива
-        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    
+        $categories = mysqli_fetch_all($categories_result, MYSQLI_ASSOC);
+ 
     } else {
     
         // Получить текст последней ошибки
@@ -35,6 +35,7 @@ else {
         exit;    
         
     }
-}
+
+}    
 
 ?>

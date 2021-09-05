@@ -7,7 +7,7 @@ require_once("data.php");
 
 $categories_id = [];
 
-if ($result) {
+if ($categories_result) {
     $categories_id = array_column($categories, "id");
 }
 

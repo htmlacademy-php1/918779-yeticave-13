@@ -70,10 +70,10 @@ function is_category_valid ($id, $allowed_list) {
 function is_number_valid ($num) {
     if (!empty($num)) {
         $num *= 1;
-        if (is_int($num) && $num > 0) {
+        if (is_numeric($num) && $num > 0) {
             return NULL;
         }
-        return "Содержимое поля должно быть целым числом больше ноля";
+        return "Содержимое поля должно быть целым числом больше нуля";
     }
 };
 
