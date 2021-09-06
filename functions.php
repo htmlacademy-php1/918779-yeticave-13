@@ -68,23 +68,25 @@ function is_category_valid ($id, $allowed_list) {
 }
 
 function is_number_valid ($num) {
-    if (!empty($num)) {
+    if (!empty($num) && !is_string($num)) {
         $num *= 1;
-        if (is_numeric($num) && $num > 0) {
+        if (is_int($num) && $num > 0) {
             return NULL;
         }
         return "Содержимое поля должно быть целым числом больше нуля";
+    } else {
+    return "Содержимое поля должно быть целым числом без пробелов";
     }
 };
 
 function valid_date ($date) {
     if (is_date_valid($date)) {
-        $now = date_create("now");
-        $d = date_create($date);
-        $diff = date_diff($d, $now);
-        $interval = date_interval_format($diff, "%d");
 
-        if ($interval < 1) {
+        $date01 = strtotime($date);
+        $date02 = strtotime("now");
+        $diff = $date01 - $date02;
+
+        if ($diff < 1) {
             return "Дата должна быть больше текущей не менее чем на один день";
         };
     } else {

@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             "errors" => $errors
          ]);
     } else {
-        $sql = "INSERT INTO lots (lot_name, category_id, user_description, price, step, date_expiration, user_id, photo, create_datе) VALUES (?, ?, ?, ?, ?, ?, 1, ?, NOW())";
+        $sql = "INSERT INTO lots (lot_name, category_id, user_description, price, step, date_expiration, user_id, photo) VALUES (?, ?, ?, ?, ?, ?, 1, ?)";
         $stmt = db_get_prepare_stmt($link, $sql, $lot);
         $res = mysqli_stmt_execute($stmt);
     
@@ -93,14 +93,14 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             header("Location: /lot.php?id=" . $lot_id);
     
         } else {
-            header("Location: /error.php", true, 404);
+            header("Location: /error.php", true, 500);
             exit;
         }
     }
 
 }
     
-$layout_content = include_template("add_layout.php", [
+$layout_content = include_template("layout.php", [
     "is_auth" => $is_auth,
     "content" => $main_content,
     "categories" => $categories,

@@ -30,7 +30,7 @@ if ($lot_result = mysqli_query($link, $lot_list)) {
             "lot" => $lot      
         ]);
         
-        $layout_content = include_template("lot_layout.php", [
+        $layout_content = include_template("layout.php", [
             "is_auth" => $is_auth,
             "content" => $main_content,
             "categories" => $categories,
