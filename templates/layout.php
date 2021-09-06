@@ -20,7 +20,7 @@
         <?php endif; ?>        
             <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
-        <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
+        <form class="main-header__search" method="get" action="search.php" autocomplete="off">
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
@@ -30,7 +30,7 @@
             <?php if ($is_auth): ?>
             <div class="user-menu__logged">
                 <p><?= $user_name; ?></p>
-                <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
+                <a class="user-menu__bets" href="bets.php">Мои ставки</a>
                 <a class="user-menu__logout" href="#">Выход</a>
             </div>
             <?php else: ?>
@@ -54,24 +54,11 @@
 <footer class="main-footer">
   <nav class="nav">
     <ul class="nav__list container">
+    <?php foreach ($categories as $category_list): ?>
       <li class="nav__item">
-        <a href="all-lots.html">Доски и лыжи</a>
+        <a href="all-lots.html"><?= $category_list['category_name']; ?></a>
       </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Крепления</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Ботинки</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Одежда</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Инструменты</a>
-      </li>
-      <li class="nav__item">
-        <a href="all-lots.html">Разное</a>
-      </li>
+    <?php endforeach; ?> 
     </ul>
   </nav>
   <div class="main-footer__bottom container">
