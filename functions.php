@@ -61,4 +61,37 @@ function decorate_time ($data_input) {
     return $data_output;
 }
 
+function is_category_valid ($id, $allowed_list) {
+    if (!in_array($id, $allowed_list)) {
+        return "Указанная категория не существует";
+    }
+}
+
+function is_number_valid ($num) {
+
+    if (empty($num) || !ctype_digit($num) || $num < 0) { 
+    
+        return 'Содержимое поля должно быть целым числом больше нуля';
+    }
+
+};
+
+function valid_date ($date) {
+    if (is_date_valid($date)) {
+
+        $date01 = strtotime($date);
+        $date02 = strtotime("now");
+        
+        if ($date01 < $date02 + SECONDS_IN_DAY) {
+
+            return 'Дата должна быть больше текущей не менее чем на один день';       
+        
+        }
+
+    } else {
+
+        return "Содержимое поля «дата завершения» должно быть датой в формате «ГГГГ-ММ-ДД»";
+    }
+};
+
 ?>
