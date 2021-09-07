@@ -1,4 +1,7 @@
 <?php
+
+define("SECONDS_IN_DAY", 86400);
+
 $is_auth = rand(0, 1);
 
 date_default_timezone_set('Europe/Moscow');

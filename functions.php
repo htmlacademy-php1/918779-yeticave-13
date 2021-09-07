@@ -68,15 +68,12 @@ function is_category_valid ($id, $allowed_list) {
 }
 
 function is_number_valid ($num) {
-    if (!empty($num) && !is_string($num)) {
-        $num *= 1;
-        if (is_int($num) && $num > 0) {
-            return NULL;
-        }
-        return "Содержимое поля должно быть целым числом больше нуля";
-    } else {
-    return "Содержимое поля должно быть целым числом без пробелов";
+
+    if (empty($num) || !ctype_digit($num) || $num < 0) { 
+    
+        return 'Содержимое поля должно быть целым числом больше нуля';
     }
+
 };
 
 function valid_date ($date) {
@@ -84,12 +81,15 @@ function valid_date ($date) {
 
         $date01 = strtotime($date);
         $date02 = strtotime("now");
-        $diff = $date01 - $date02;
+        
+        if ($date01 < $date02 + SECONDS_IN_DAY) {
 
-        if ($diff < 1) {
-            return "Дата должна быть больше текущей не менее чем на один день";
-        };
+            return 'Дата должна быть больше текущей не менее чем на один день';       
+        
+        }
+
     } else {
+
         return "Содержимое поля «дата завершения» должно быть датой в формате «ГГГГ-ММ-ДД»";
     }
 };
