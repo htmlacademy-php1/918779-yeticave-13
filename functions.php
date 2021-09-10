@@ -94,4 +94,20 @@ function valid_date ($date) {
     }
 };
 
+
+function is_email_valid ($email) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "E-mail должен быть корректным";
+    }
+};
+
+function is_length_valid ($value, $min, $max) {
+    if ($value) {
+        $len = strlen($value);
+        if ($len < $min or $len > $max) {
+            return "Значение должно быть от $min до $max символов";
+        }
+    }
+};
+
 ?>
