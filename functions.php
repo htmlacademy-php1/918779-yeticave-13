@@ -110,7 +110,7 @@ function is_length_valid ($value, $min, $max) {
     }
 };
 
-function is_email_empty ($link, $sql, $data) {
+function is_email_used ($link, $sql, $data) {
 
     $stmt = mysqli_prepare($link, $sql);
     mysqli_stmt_bind_param($stmt, 's', $data);
