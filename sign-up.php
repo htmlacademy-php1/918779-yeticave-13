@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $user = filter_input_array(INPUT_POST,
     [
-        "email"=>FILTER_DEFAULT,
+        "email"=>FILTER_VALIDATE_EMAIL,
         "user_password"=>FILTER_DEFAULT,
         "user_name"=>FILTER_DEFAULT,
         "contacts"=>FILTER_DEFAULT
@@ -65,23 +65,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = mysqli_connect_error();
             }
 
-            $email = mysqli_real_escape_string($link, $user['email']);
-            $name = mysqli_real_escape_string($link, $user['user_name']);
+ 
+            $sql = "SELECT id FROM users WHERE email = ?";
 
-            $email_sql = "SELECT id FROM users WHERE email = '$email'";
-            $name_sql = "SELECT id FROM users WHERE user_name = '$name'";            
+            $email = is_email_empty($link, $sql, $user['email']);
 
-            $email_res = mysqli_query($link, $email_sql);
-            $name_res = mysqli_query($link, $name_sql);
+            print ($email);
 
-            if (mysqli_num_rows($email_res) > 0) {
+            if ($email > 0) {
             $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
             
-            if (mysqli_num_rows($name_res) > 0) {
-                $errors["user_name"] = 'Пользователь с этим именем уже зарегистрирован';
-                } 
-
         if (count($errors)) {
             $main_content = include_template("sign-up_main.php", [
                 "categories" => $categories,
@@ -90,10 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         } else {
 
+            $password = password_hash($user["user_password"], PASSWORD_DEFAULT);
+
             $sql = "INSERT INTO users (email, user_name, user_password, contacts) VALUES (?, ?, ?, ?)";
-            $user["user_password"] = password_hash($user["user_password"], PASSWORD_DEFAULT);
         
-            $stmt = db_get_prepare_stmt($link, $sql, $user);
+            $stmt = db_get_prepare_stmt($link, $sql, [$user['email'], $user['user_name'], $password, $user['contacts']]);
             $res = mysqli_stmt_execute($stmt);
             
             if ($res) {

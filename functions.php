@@ -59,13 +59,13 @@ function decorate_time ($data_input) {
     $data_output = $data_input[0] . ':' . $data_input[1];
 
     return $data_output;
-}
+};
 
 function is_category_valid ($id, $allowed_list) {
     if (!in_array($id, $allowed_list)) {
         return "Указанная категория не существует";
     }
-}
+};
 
 function is_number_valid ($num) {
 
@@ -108,6 +108,18 @@ function is_length_valid ($value, $min, $max) {
             return "Значение должно быть от $min до $max символов";
         }
     }
+};
+
+function is_email_empty ($link, $sql, $data) {
+
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 's', $data);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_bind_result($stmt, $res);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $res;
 };
 
 ?>
