@@ -11,7 +11,9 @@ if ($categories_result) {
     $categories_id = array_column($categories, "id");
 }
 
-$main_content = include_template("sign-up_main.php", ["categories" => $categories]);
+$main_content = include_template("sign-up_main.php", [
+    "categories" => $categories
+]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -62,33 +64,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$link) {
                 $error = mysqli_connect_error();
             }
-            $sql = "SELECT email, user_name FROM users";
-            
-            $result = mysqli_query($link, $sql);
-            $rows = mysqli_num_rows($result);
-            
-            if ($rows === 1) {
-                $row = mysqli_fetch_assoc($result);
-            } else if ($rows > 1) {
-                $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            $email = mysqli_real_escape_string($link, $user['email']);
+            $name = mysqli_real_escape_string($link, $user['user_name']);
+
+            $email_sql = "SELECT id FROM users WHERE email = '$email'";
+            $name_sql = "SELECT id FROM users WHERE user_name = '$name'";            
+
+            $email_res = mysqli_query($link, $email_sql);
+            $name_res = mysqli_query($link, $name_sql);
+
+            if (mysqli_num_rows($email_res) > 0) {
+            $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
-
-            if ($result) {
-                $users_data = $row;
-            }
-            $error = mysqli_error($link);
-
-            $emails = array_column($users_data, "email");
-            $names = array_column($users_data, "user_name");
-
-      
-        if (in_array($user["email"], $emails)) {
-            $errors["email"] = "Пользователь таким e-mail уже зарегистрирован";
-        }
-
-        if (in_array($user["user_name"], $names)) {
-            $errors["user_name"] = "Пользователь с таким именем уже зарегистрирован";
-        }
+            
+            if (mysqli_num_rows($name_res) > 0) {
+                $errors["user_name"] = 'Пользователь с этим именем уже зарегистрирован';
+                } 
 
         if (count($errors)) {
             $main_content = include_template("sign-up_main.php", [
@@ -111,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
+
 }
 
 $layout_content = include_template("layout.php", [
