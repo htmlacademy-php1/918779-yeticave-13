@@ -112,8 +112,7 @@ function is_length_valid ($value, $min, $max) {
 
 function is_email_used ($link, $sql, $data) {
 
-    $stmt = mysqli_prepare($link, $sql);
-    mysqli_stmt_bind_param($stmt, 's', $data);
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_bind_result($stmt, $res);
     mysqli_stmt_fetch($stmt);

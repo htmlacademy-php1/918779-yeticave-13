@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             $sql = "SELECT id FROM users WHERE email = ?";            
 
-            if (is_email_used($link, $sql, $user['email'])) {
+            if (is_email_used($link, $sql, [$user['email']])) {
             $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
             
