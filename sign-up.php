@@ -70,8 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $email = is_email_empty($link, $sql, $user['email']);
 
-            print ($email);
-
             if ($email > 0) {
             $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
