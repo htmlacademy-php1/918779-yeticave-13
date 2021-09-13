@@ -96,7 +96,7 @@ else {
     ]);
 
     if (isset($_SESSION['user'])) {
-        header("Location: /error.php");
+        header("Location: /index.php");
         exit();
     }
 };
