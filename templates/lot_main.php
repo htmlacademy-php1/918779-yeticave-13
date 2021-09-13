@@ -20,6 +20,7 @@
           <p class="lot-item__description"><?= $lot['user_description']; ?></p>
         </div>
         <div class="lot-item__right">
+          <?php if ($is_auth): ?>
           <div class="lot-item__state">
             <?php $date_remaining = date_range(htmlspecialchars($lot['date_expiration']));?>
             <div class="lot-item__timer timer <?=date_warning($date_remaining[0]);?>">
@@ -43,6 +44,7 @@
               <button type="submit" class="button">Сделать ставку</button>
             </form>
           </div>
+          <?php endif; ?>
           <div class="history">
             <h3>История ставок (<span>10</span>)</h3>
             <table class="history__list">

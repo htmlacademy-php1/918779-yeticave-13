@@ -1,7 +1,7 @@
 <?php
+require_once('init.php');
 require_once('helpers.php');
 require_once('functions.php');
-require_once('init.php');
 require_once('data.php');
 
 //Запрос на показ лотов
@@ -27,10 +27,10 @@ $main_content = include_template('main.php', [
 ]);
 
 $layout_content = include_template('layout.php', [
-    'is_auth' => $is_auth,
     'content' => $main_content,
     'categories' => $categories,
     'title' => 'Главная',
+    'is_auth' => $is_auth,
     'user_name' => $user_name
 ]);
 

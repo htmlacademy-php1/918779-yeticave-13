@@ -2,11 +2,14 @@
 
 define("SECONDS_IN_DAY", 86400);
 
-$is_auth = rand(0, 1);
+$user_name = "";
+
+$is_auth = !empty($_SESSION["user"]);
+if ($is_auth) {
+    $user_name = $_SESSION["user"];
+};
 
 date_default_timezone_set('Europe/Moscow');
-
-$user_name = "Антон"; // укажите здесь ваше имя
 
 if(!$link) {
 

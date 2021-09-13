@@ -121,4 +121,13 @@ function is_email_used ($link, $sql, $data) {
     return $res;
 };
 
+function is_login_data ($link, $sql, $data) {
+
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    return $res;
+};
+
 ?>
