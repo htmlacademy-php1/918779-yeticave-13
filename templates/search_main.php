@@ -11,7 +11,7 @@
 
     <div class="container">
       <section class="lots">
-        <h2>Результаты поиска по запросу «<span><?= $search; ?></span>»</h2>
+        <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($search); ?></span>»</h2>
         <?php if (!empty($lots)): ?>
         <ul class="lots__list">
           <?php foreach ($lots as $lot): ?>
