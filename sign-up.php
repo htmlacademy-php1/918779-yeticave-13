@@ -11,6 +11,13 @@ if ($categories_result) {
     $categories_id = array_column($categories, "id");
 }
 
+if ($is_auth) {
+    
+    header("Location: /index.php");
+    exit();
+    
+}
+
 $main_content = include_template("sign-up_main.php", [
     "categories" => $categories
 ]);
@@ -65,34 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = mysqli_connect_error();
             }
 
- 
-            $sql = "SELECT id FROM users WHERE email = ?";            
-
-            if (is_email_used($link, $sql, [$user['email']])) {
+            if (is_email_used($link, [$user['email']])) {
             $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
             
-        if (count($errors)) {
-            $main_content = include_template("sign-up_main.php", [
-                "categories" => $categories,
-                "user" => $user,
-                "errors" => $errors
-            ]);
-        } else {
+            if (count($errors)) {
+                $main_content = include_template("sign-up_main.php", [
+                    "categories" => $categories,
+                    "user" => $user,
+                    "errors" => $errors
+                ]);
 
-            $password = password_hash($user["user_password"], PASSWORD_DEFAULT);
-
-            $sql = "INSERT INTO users (email, user_name, user_password, contacts) VALUES (?, ?, ?, ?)";
-        
-            $stmt = db_get_prepare_stmt($link, $sql, [$user['email'], $user['user_name'], $password, $user['contacts']]);
-            $res = mysqli_stmt_execute($stmt);
-            
-            if ($res) {
-                header("Location: /login.php");
             } else {
-                $error = mysqli_error($link);
+
+                $password = password_hash($user["user_password"], PASSWORD_DEFAULT);
+
+                $sql = "INSERT INTO users (email, user_name, user_password, contacts) VALUES (?, ?, ?, ?)";
+            
+                $stmt = db_get_prepare_stmt($link, $sql, [$user['email'], $user['user_name'], $password, $user['contacts']]);
+                $res = mysqli_stmt_execute($stmt);
+                
+                if ($res) {
+                    header("Location: /login.php");
+                } else {
+                    $error = mysqli_error($link);
+                }
             }
-        }
     }
 
 }
@@ -104,8 +109,6 @@ $layout_content = include_template("layout.php", [
     "is_auth" => $is_auth,
     "user_name" => $user_name
 ]);
-
-
 
 print($layout_content);
 

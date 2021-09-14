@@ -27,14 +27,16 @@ if ($lot_result = mysqli_query($link, $lot_list)) {
 
         $main_content = include_template("lot_main.php", [
             "categories" => $categories,
-            "lot" => $lot      
+            "lot" => $lot,
+            "is_auth" => $is_auth,
+            "user_name" => $user_name      
         ]);
         
-        $layout_content = include_template("layout.php", [
-            "is_auth" => $is_auth,
+        $layout_content = include_template("layout.php", [            
             "content" => $main_content,
             "categories" => $categories,
             "title" => $lot["lot_name"],
+            "is_auth" => $is_auth,
             "user_name" => $user_name
         ]);
 

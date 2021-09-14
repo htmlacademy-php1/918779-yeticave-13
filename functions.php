@@ -1,4 +1,10 @@
+
+
 <?php
+
+require_once("init.php");
+require_once("helpers.php");
+require_once("data.php");
 
 function decorate_price ($input) {
     $output = "";
@@ -110,12 +116,26 @@ function is_length_valid ($value, $min, $max) {
     }
 };
 
-function is_email_used ($link, $sql, $data) {
+function is_email_used ($link, $data) {
+
+    $sql = "SELECT id FROM users WHERE email = ?";
 
     $stmt = db_get_prepare_stmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_bind_result($stmt, $res);
     mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $res;
+};
+
+function is_login_data_correct ($link, $data) {
+
+    $sql = "SELECT  id, email, user_name, user_password FROM users WHERE email = ?";
+
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
     mysqli_stmt_close($stmt);
 
     return $res;
