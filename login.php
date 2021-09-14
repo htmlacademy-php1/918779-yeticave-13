@@ -10,15 +10,13 @@ $main_content = include_template('login_main.php', [
 ]);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     $required = ["email", "user_password"];
     $errors = [];
 
     $rules = [
         "email" => function($value) {
             return is_email_valid($value);
-        },
-        "user_password" => function($value) {
-            return is_length_valid($value, 6, 8);
         }
     ];
 
