@@ -34,7 +34,7 @@
       <?php $classname = isset($errors["contacts"]) ? "form__item--invalid" : ""; ?>
       <div class="form__item <?= $classname; ?>">
         <label for="message">Контактные данные <sup>*</sup></label>
-        <textarea id="message" name="contacts" placeholder="Напишите как с вами связаться"><?= htmlspecialchars($user['user_contacts'] ?? ''); ?></textarea>
+        <textarea id="message" name="contacts" placeholder="Напишите как с вами связаться"><?= htmlspecialchars($user['contacts'] ?? ''); ?></textarea>
         <span class="form__error"><?= $errors["contacts"]; ?></span>
       </div>
       <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
