@@ -5,12 +5,19 @@ require_once("helpers.php");
 require_once("functions.php");
 require_once("data.php");
 
+if ($is_auth) {
+
+    header("Location: /index.php");
+    exit();
+    
+}
+
 $main_content = include_template('login_main.php', [
     "categories" => $categories
 ]);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     $required = ["email", "user_password"];
     $errors = [];
 
@@ -55,11 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         /*  Если соединение есть то...  */
-
-            $sql = "SELECT  id, email, user_name, user_password FROM users WHERE email = ?";
-
   
-            $res = is_login_data($link, $sql, [$user_info['email']]);
+            $res = is_login_data_correct($link, [$user_info['email']]);
 
             $user_data = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
 

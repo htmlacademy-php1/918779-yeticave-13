@@ -11,19 +11,11 @@ if ($categories_result) {
     $categories_id = array_column($categories, "id");
 }
 
-if (!$is_auth) {
-    $main_content = include_template("403_main.php", [
-        "categories" => $categories
-    ]);
-    $layout_content = include_template("layout.php", [
-        "content" => $main_content,
-        "categories" => $categories,
-        "title" => $title,
-        "is_auth" => $is_auth,
-        "user_name" => $user_name
-    ]);
-    print($layout_content);
+if ($is_auth) {
+    
+    header("Location: /index.php");
     exit();
+    
 }
 
 $main_content = include_template("sign-up_main.php", [
@@ -80,10 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = mysqli_connect_error();
             }
 
- 
-            $sql = "SELECT id FROM users WHERE email = ?";            
-
-            if (is_email_used($link, $sql, [$user['email']])) {
+            if (is_email_used($link, [$user['email']])) {
             $errors["email"] = 'Пользователь с этим email уже зарегистрирован';
             }
             
