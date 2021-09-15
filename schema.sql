@@ -45,3 +45,5 @@ lot_id INT,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (lot_id) REFERENCES lots(id)
 );
+
+CREATE FULLTEXT INDEX yeticave_search ON lots(lot_name, user_description);
