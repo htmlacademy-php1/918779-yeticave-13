@@ -3,7 +3,7 @@
       <ul class="nav__list container">
       <?php foreach ($categories as $category_list): ?>
         <li class="nav__item">
-          <a href="<?= $category_list['id']; ?>"><?= $category_list['category_name']; ?></a>
+          <a href="all-lots.php?category_id=<?= $category_list['id']; ?>"><?= $category_list['category_name']; ?></a>
         </li>
       <?php endforeach; ?>
       </ul>
@@ -51,7 +51,7 @@
         <?php endforeach; ?>
 
         <li class="pagination-item pagination-item-next">
-            <a <?php if ($current_page < $pages_count): ?> href="search.php?search=<?= $search; ?>&page=<?= $next; ?>"<?php endif; ?>>Вперед</a>
+            <a <?php if ($current_page < $pages_count): ?> href="search.php?search=<?= htmlspecialchars($search); ?>&page=<?= $next; ?>"<?php endif; ?>>Вперед</a>
         </li>
       </ul>
       <?php endif; ?>

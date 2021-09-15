@@ -1,8 +1,11 @@
 <?php
 require_once('init.php');
+require_once('data.php');
 require_once('helpers.php');
 require_once('functions.php');
-require_once('data.php');
+require_once("getwinner.php");
+
+$bet =[];
 
 //Запрос на показ лотов
 $sql = 'SELECT lots.id, lots.lot_name, lots.price, lots.photo, lots.date_expiration, categories.category_name, MAX(bets.sum) as current_price 
@@ -20,6 +23,11 @@ if ($res) {
     header('Location: /error.php',true, 404);
     exit;
 }
+
+$get_winner = include_template("getwinner.php", [
+    "lots" => $lots,
+    "bet" => $bet  
+]);
 
 $main_content = include_template('main.php', [
     'categories' => $categories,

@@ -1,0 +1,9 @@
+{
+    "name": "antonromanov/yeticave",
+    "description": "Website for lerning",
+    "type": "project",
+    "license": "mit",
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
