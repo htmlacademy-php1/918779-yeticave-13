@@ -13,8 +13,6 @@ if ($search) {
 
     $current_page = (int) ($_GET["page"] ?? 1);
 
-
-    (>=1 и < $pages_count),
     $page_items = 9;
     $offset = ($current_page - 1) * $page_items;
 
@@ -26,6 +24,12 @@ if ($search) {
 
     $items_count = mysqli_fetch_assoc($result)['count'];
     $pages_count = ceil($items_count / $page_items);
+
+    if($current_page === 0 || $current_page > $pages_count) {
+
+        header("Location: /index.php");
+    }
+
     $pages = range(1, $pages_count);
     
     $sql = "SELECT lots.id, lots.lot_name, lots.price, lots.photo, lots.date_expiration, categories.category_name FROM lots
